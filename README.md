@@ -6,7 +6,11 @@ Download [WFDownloader](https://www.wfdownloader.xyz/download)
 
 ## Usage
 
-1. Fetch for export (WFDownloader)
+1. Fetch for export (WFDownloader 0.87)
+
+    ![config](screenshots/fetch_config.png)
+
+    Export to export.json
 
 2. Get all tweet urls
 
@@ -14,9 +18,11 @@ Download [WFDownloader](https://www.wfdownloader.xyz/download)
     python main.py -f export.json
     ```
 
-3. Batch links (WFDownloader)
+3. Batch links search from multiple urls (WFDownloader)
 
-    More Options -> All delay >5s
+    ![config](screenshots/batch.png)
+
+    More Options -> Delay each download > 5s
 
 4. Rename with date
 

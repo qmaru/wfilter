@@ -23,11 +23,9 @@ def get_basic_info(file: str) -> List[Dict[str, str]]:
                     created_at = otherPropertiesMap["created_at"]
                     dt = datetime.strptime(created_at, "%a %b %d %H:%M:%S %z %Y")
                     output_date = dt.strftime("%Y%m%d%H%M%S")
-                    x_info.append({
-                        "date": output_date,
-                        "url": full_url,
-                        "id": status_id
-                    })
+                    x_info.append(
+                        {"date": output_date, "url": full_url, "id": status_id}
+                    )
             else:
                 print("file data error")
                 exit()
@@ -45,7 +43,10 @@ def rename_files(save_folder: str, basic_info: List[Dict[str, str]]):
                 date = info["date"]
                 new_name = f"{date}_{base_name}{ext}"
                 new_path = os.path.join(dir_path, new_name)
-                os.rename(file, new_path)
+                try:
+                    os.rename(file, new_path)
+                except BaseException as e:
+                    print(file, new_path, e)
 
 
 def main():
