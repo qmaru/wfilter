@@ -14,18 +14,22 @@ def get_basic_info(file: str) -> List[Dict[str, str]]:
         for link in links:
             if link.get("otherPropertiesMap"):
                 otherPropertiesMap = link["otherPropertiesMap"]
-                is_retweet = otherPropertiesMap["is_retweet"]
-                is_reply_tweet = otherPropertiesMap["is_reply_tweet"]
-                is_quoted_tweet = otherPropertiesMap["is_quoted_tweet"]
+                is_retweet = otherPropertiesMap.get("is_retweet", "false").lower() == "true"
+                is_reply_tweet = otherPropertiesMap.get("is_reply_tweet", "false").lower() == "true"
+                is_quoted_tweet = (
+                    otherPropertiesMap.get("is_quoted_tweet", "false").lower() == "true"
+                )
                 if is_retweet == is_reply_tweet == is_quoted_tweet:
-                    status_id = otherPropertiesMap["status_id"]
-                    full_url = otherPropertiesMap["full_url"]
-                    created_at = otherPropertiesMap["created_at"]
-                    dt = datetime.strptime(created_at, "%a %b %d %H:%M:%S %z %Y")
-                    output_date = dt.strftime("%Y%m%d%H%M%S")
-                    x_info.append(
-                        {"date": output_date, "url": full_url, "id": status_id}
-                    )
+                    if not otherPropertiesMap.get("error"):
+                        status_id = otherPropertiesMap["status_id"]
+                        full_url = otherPropertiesMap["full_url"]
+                        created_at = otherPropertiesMap["created_at"]
+                        dt = datetime.strptime(created_at, "%a %b %d %H:%M:%S %z %Y")
+                        output_date = dt.strftime("%Y%m%d%H%M%S")
+                        x_info.append({"date": output_date, "url": full_url, "id": status_id})
+                    else:
+                        print("error link: ", link["address"])
+                        continue
             else:
                 print("file data error")
                 exit()

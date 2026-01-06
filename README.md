@@ -8,7 +8,7 @@ Download [WFDownloader](https://www.wfdownloader.xyz/download)
 
 1. Fetch for export (WFDownloader 0.87)
 
-    ![config](screenshots/fetch_config.png)
+    ![config](screenshots/fetch_config_v2.png)
 
     Export to export.json
 
